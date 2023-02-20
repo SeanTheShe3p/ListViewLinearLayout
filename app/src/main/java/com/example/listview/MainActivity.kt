@@ -13,15 +13,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val listView = findViewById<ListView>(R.id.listView)
-        var names = arrayOf("Sean", "David", "Suyeta", "Widdowson")
+        //var names = arrayOf("Sean", "David", "Suyeta", "Widdowson")
+        var list = ArrayList<Model>()
 
-        var arrayAdapter: ArrayAdapter<String> = ArrayAdapter(
-            this, android.R.layout.simple_list_item_1, names
-        )
-        listView.adapter = arrayAdapter
+        list.add(Model("Dave", "Teacher",R.drawable.ic_launcher_foreground))
+        list.add(Model("Sean", "Student",R.drawable.ic_launcher_foreground))
 
-        listView.setOnItemClickListener { adapterView, view, i, l ->
-            Toast.makeText(this, "This is " + names[i], Toast.LENGTH_SHORT).show()
+
+        listView.adapter = MyCustomAdapter(this, R.layout.custom_item_layout, list)
+
+        listView.setOnItemClickListener { MyCustomAdapter, view, i, l ->
+            Toast.makeText(this, "This is " + list[i], Toast.LENGTH_SHORT).show()
         }
     }
 }
